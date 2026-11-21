@@ -4,7 +4,7 @@ Classification of cassava leaf photos into 5 classes (4 diseases + healthy) from
 
 [![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/code/ivanventyk/cassava-disease-classification-resnet18-pytorch)
 
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=for-the-badge) ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white&style=for-the-badge) ![torchvision](https://img.shields.io/badge/torchvision-EE4C2C?style=for-the-badge) ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white&style=for-the-badge) ![pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white&style=for-the-badge) ![matplotlib](https://img.shields.io/badge/matplotlib-11557C?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=for-the-badge) ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white&style=for-the-badge) ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white&style=for-the-badge) ![pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white&style=for-the-badge) ![matplotlib](https://img.shields.io/badge/matplotlib-11557C?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48Y2lyY2xlIGN4PSIxMjgiIGN5PSIxMjgiIHI9IjExMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE0Ii8%2BPGc%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0ibTEwNy44IDM2IC4xLjcgMjAuOCA5MS4xLTEuMy43LTU5LjktNzEuOC0uNS0uNi42LS41QTk0IDk0IDAgMCAxIDEwNyAzNi4xeiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Im01NCA5MS41LjYuMyA3My43IDM1LjUtLjIgMS40LTgwLjUgMTQuNi0uNy4yLS4xLS44YTgzIDgzIDAgMCAxIDYuOC01MC41eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Im0xMjcuNyAxMjcuMy43IDEuM0w5MCAxNTUuMmwtLjYuNS0uNC0uNmE0OCA0OCAwIDAgMS0zLjgtNi41bC0uMy0uNy43LS4zeiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Im0xMjguNyAxMjcuOSA5LjggNTcuNi4yLjctLjguMmE1OSA1OSAwIDAgMS0yMy0uN2wtLjgtLjIuMi0uNyAxMy01N3oiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJtMTI4LjUgMTI3LjQgNzMuNyA1Ny41LjYuNC0uNS42YTk0IDk0IDAgMCAxLTE1LjUgMTUuOGwtLjYuNS0uNS0uNi01OC4zLTczLjF6Ii8%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0ibTE1MC43IDExOS44LjIuN2EyNCAyNCAwIDAgMSAxLjIgNy41di44aC0yMy42bC4xLTEuOCAyMS40LTd6Ii8%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0ibTE1Mi4yIDYxLjQuNy4yYTcxIDcxIDAgMCAxIDE5LjMgMTFsLjYuNS0uNS41LTQzLjcgNTQuOS0xLjMtLjggMjQuNi02NS42eiIvPjwvZz48Y2lyY2xlIGN4PSIxMjgiIGN5PSIxMjgiIHI9IjYiIGZpbGw9IiNmZmYiLz48L3N2Zz4%3D&style=for-the-badge)
 
 ## 📊 Results
 
@@ -21,6 +21,8 @@ Validation set: 4,280 images (stratified 20% split). Single run per experiment.
 | v6 | Class weights removed | 0.850 | 0.736 |
 | **v7** | **Resolution 384 px** | **0.874** | **0.772** |
 
+**Bold** = best result (the final model, v7).
+
 Per-class F1 of v7: CMD 0.955, CBSD 0.794, CGM 0.774, Healthy 0.720, CBB 0.617.
 
 - The largest gains came from training settings (v1 → v2) and higher resolution (v6 → v7). At 384 px, F1 improved for all 5 classes, and diseased leaves predicted as healthy dropped from 213 to 170.
@@ -32,11 +34,17 @@ Per-class F1 of v7: CMD 0.955, CBSD 0.794, CGM 0.774, Healthy 0.720, CBB 0.617.
 <!-- >>> IMAGE: put v7_curves.png (from the Kaggle notebook's Output tab) into the images/ folder <<< -->
 ![Training curves of the final model](images/v7_curves.png)
 
+*Final model (v7, 384 px): loss (left), accuracy and macro-F1 (right) per epoch. Validation loss stops improving after about epoch 9.*
+
 <!-- >>> IMAGE: put v7_confusion_matrix.png (from the Kaggle notebook's Output tab) into the images/ folder <<< -->
 ![Confusion matrix of the final model](images/v7_confusion_matrix.png)
 
+*Row-normalized confusion matrix of v7: each row shows how the images of one true class were predicted.*
+
 <!-- >>> IMAGE: put v7_examples.png (from the Kaggle notebook's Output tab) into the images/ folder <<< -->
 ![Correct and wrong predictions of the final model](images/v7_examples.png)
+
+*Two correct (green) and two wrong (red) v7 predictions per class.*
 
 ## 🛠️ Approach
 
